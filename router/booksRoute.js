@@ -29,7 +29,7 @@ router.get('/books/:id', async (req, res) => {
 
 // Route to add a new Task
 
-router.post('/books', async (req, res) => {
+router.post('/books/add', async (req, res) => {
 
   const {name, poster, rating, summary} = req.body;
 
