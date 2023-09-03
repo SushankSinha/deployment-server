@@ -58,7 +58,7 @@ router.put('/books/edit/:id', async (req, res) => {
   const {name, poster, rating, summary} = req.body;
 
     try {
-      const updatedBooks = await Book.findByIdAndUpdate({id:id}, { name, poster, rating, summary}, { new: true });
+      const updatedBooks = await Book.updateOne({id:id}, { name, poster, rating, summary}, { new: true });
       res.status(201).json({message : "Book details Updated!", book: updatedBooks});
       if (!updatedBooks) {
         return res.status(404).json({ message: "Book not found" });
