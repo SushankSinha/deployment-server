@@ -33,9 +33,6 @@ router.post('/books/add', async (req, res) => {
 
   const {name, poster, rating, summary} = req.body;
 
-  if(!name || !poster || !rating || !summary){
-      res.status(422).json({error : "Fill the required fields"})
-  }else{
 
   try {
               
@@ -48,7 +45,6 @@ router.post('/books/add', async (req, res) => {
           } catch(err){
       console.log(err)
   }
-}
 });
 
 router.put('/books/edit/:id', async (req, res) => {
