@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 
 const bookData = new mongoose.Schema({
-    bookName : {
+    name : {
         type : String
     },
     poster : {
