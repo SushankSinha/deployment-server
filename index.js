@@ -1,5 +1,5 @@
-import express from "express";
 import dotenv from "dotenv";
+import express from "express";
 import mongoose from 'mongoose';
 import cors from "cors";
 import books from './router/booksRoute.js'
@@ -72,6 +72,6 @@ app.use(
   })
 );
 
-app.use(express.json());
+app.use(express.urlencoded({extended: true}));
 
 app.use(books)
