@@ -20,7 +20,7 @@ router.get('/books', async (req, res) => {
 router.get('/books/:id', async (req, res) => {
   const id = req.params.id;
   try {
-    const book = await Book.findOne({_id:id});
+    const book = await Book.findOne({id:id});
     res.send(book);
   } catch (error) {
     res.status(500).json({ message: 'Error retrieving Books' });
@@ -31,15 +31,15 @@ router.get('/books/:id', async (req, res) => {
 
 router.post('/books', async (req, res) => {
 
-  const {title, content, user, status, completion} = req.body;
+  const {name, poster, rating, summary} = req.body;
 
-  if(!title || !content || !user){
+  if(!name || !poster || !rating || !summary){
       res.status(422).json({error : "Fill the required fields"})
   }else{
 
   try {
               
-          const bookDetails = new Book({title, content, user, status, completion});
+          const bookDetails = new Book({name, poster, rating, summary});
 
           await bookDetails.save();            
           
@@ -55,10 +55,10 @@ router.put('/books/:id', async (req, res) => {
 
   const id = req.params.id;
 
-  const {title, content, user, status, completion} = req.body;
+  const {name, poster, rating, summary} = req.body;
 
     try {
-      const updatedBooks = await Book.findByIdAndUpdate({_id:id}, { title, content, user, status, completion}, { new: true });
+      const updatedBooks = await Book.findByIdAndUpdate({id:id}, { name, poster, rating, summary}, { new: true });
       res.status(201).json({message : "Book details Updated!", book: updatedBooks});
       if (!updatedBooks) {
         return res.status(404).json({ message: "Book not found" });
@@ -72,7 +72,7 @@ router.delete('/books/:id', async (req, res) => {
   const id  = req.params.id;
 
   try {
-    await Book.findByIdAndDelete({_id:id})
+    await Book.findByIdAndDelete({id:id})
     res.status(204).json({ message: 'Book deleted successfully' });
   } catch (error) {
     res.status(500).json({ message: 'Error deleting Book', error });
